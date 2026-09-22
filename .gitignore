@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Training artifacts (checkpoints, logs, metrics)
+*.pt
+*.pth
+*.npz
+*.npy
+*.ckpt
+*.log
+*.csv
+*.json
+
+# Environment / dependencies
+.venv/
+venv/
+env/
+*.egg-info/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

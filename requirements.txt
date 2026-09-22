@@ -1,0 +1,11 @@
+numpy==1.23.5
+gym==0.21.0
+pyglet==1.5.27
+torch==2.5.1
+torchvision==0.20.1
+tensorboardX==2.6.5
+tensorboard==2.20.0
+matplotlib==3.9.4
+pandas==2.3.3
+seaborn==0.13.2
+networkx==3.2.1
