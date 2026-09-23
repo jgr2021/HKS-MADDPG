@@ -6,6 +6,7 @@ Code and manuscript for **Heat-Kernel Structural Features for Cooperative Policy
 
 - [Read the five-page paper](paper/icassp_hks/main.pdf)
 - [LaTeX source](paper/icassp_hks/main.tex)
+- Editable diagrams: [task schematic](paper/icassp_hks/figure1_task.drawio) and [HKS method](paper/icassp_hks/figure2_hks_actor.drawio)
 
 The paper studies cooperative navigation in MPE `simple_spread` with three agents and three landmarks. Its experimental comparison is **MADDPG with raw observations vs. MADDPG with HKS features**, trained with seeds 41–45.
 

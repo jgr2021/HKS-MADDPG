@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mxfile host="app.diagrams.net" version="31.4.5" type="device" compressed="false">
+  <diagram id="Figure 2 - proposed HKS method" name="Figure 2 - proposed HKS method">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1100" pageHeight="615" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="stage_obs" value="" style="rounded=1;arcSize=8;html=1;fillColor=#F8FAFC;strokeColor=#C9D6DF;strokeWidth=1.4;container=1;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="500" height="245" as="geometry"/>
+        </mxCell>
+        <mxCell id="stage_obs_title" value="1  OBSERVATION" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=19;fontColor=#17364D;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="stage_obs">
+          <mxGeometry x="20" y="12" width="460" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="stage_graph" value="" style="rounded=1;arcSize=8;html=1;fillColor=#F8FAFC;strokeColor=#C9D6DF;strokeWidth=1.4;container=1;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="580" y="20" width="500" height="245" as="geometry"/>
+        </mxCell>
+        <mxCell id="stage_graph_title" value="2  BIPARTITE GRAPH" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=19;fontColor=#17364D;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="stage_graph">
+          <mxGeometry x="20" y="12" width="460" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="stage_hks" value="" style="rounded=1;arcSize=8;html=1;fillColor=#F8FAFC;strokeColor=#C9D6DF;strokeWidth=1.4;container=1;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="580" y="305" width="500" height="245" as="geometry"/>
+        </mxCell>
+        <mxCell id="stage_hks_title" value="3  HEAT-KERNEL FEATURES" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=19;fontColor=#17364D;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="stage_hks">
+          <mxGeometry x="20" y="12" width="460" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="stage_actor" value="" style="rounded=1;arcSize=8;html=1;fillColor=#F8FAFC;strokeColor=#C9D6DF;strokeWidth=1.4;container=1;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="20" y="305" width="500" height="245" as="geometry"/>
+        </mxCell>
+        <mxCell id="stage_actor_title" value="4  POLICY INPUT" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=19;fontColor=#17364D;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="stage_actor">
+          <mxGeometry x="20" y="12" width="460" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="obs_vector" value="oᵢ ∈ R¹⁸" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#E8F3F9;strokeColor=#2877A8;strokeWidth=1.3;fontFamily=Arial;fontSize=23;fontColor=#243746;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="stage_obs">
+          <mxGeometry x="25" y="56" width="190" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="obs_fields" value="velocity + position (4)&lt;br&gt;landmark offsets (6)&lt;br&gt;teammate offsets (4)&lt;br&gt;communication (4)" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontColor=#243746;fontStyle=0;align=left;verticalAlign=middle;" vertex="1" parent="stage_obs">
+          <mxGeometry x="250" y="53" width="228" height="98" as="geometry"/>
+        </mxCell>
+        <mxCell id="obs_coordinates" value="Xᵢ = [0, Δpⱼ, Δpₖ, Δℓ₁, Δℓ₂, Δℓ₃]&lt;br&gt;from local relative positions" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#C9D6DF;strokeWidth=1.3;fontFamily=Arial;fontSize=18;fontColor=#243746;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="stage_obs">
+          <mxGeometry x="25" y="165" width="450" height="58" as="geometry"/>
+        </mxCell>
+        <mxCell id="method_agent_0" value="Aᵢ" style="ellipse;html=1;fillColor=#2877A8;strokeColor=#2877A8;strokeWidth=1.7;fontFamily=Arial;fontSize=16;fontColor=#FFFFFF;fontStyle=1;" vertex="1" parent="stage_graph">
+          <mxGeometry x="36" y="60" width="40" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="method_landmark_0" value="L1" style="ellipse;html=1;fillColor=#FFF2DF;strokeColor=#C97924;strokeWidth=1.7;fontFamily=Arial;fontSize=16;fontColor=#C97924;fontStyle=1;" vertex="1" parent="stage_graph">
+          <mxGeometry x="176" y="60" width="40" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="method_agent_1" value="Aⱼ" style="ellipse;html=1;fillColor=#E8F3F9;strokeColor=#2877A8;strokeWidth=1.7;fontFamily=Arial;fontSize=16;fontColor=#17364D;fontStyle=1;" vertex="1" parent="stage_graph">
+          <mxGeometry x="36" y="112" width="40" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="method_landmark_1" value="L2" style="ellipse;html=1;fillColor=#FFF2DF;strokeColor=#C97924;strokeWidth=1.7;fontFamily=Arial;fontSize=16;fontColor=#C97924;fontStyle=1;" vertex="1" parent="stage_graph">
+          <mxGeometry x="176" y="112" width="40" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="method_agent_2" value="Aₖ" style="ellipse;html=1;fillColor=#E8F3F9;strokeColor=#2877A8;strokeWidth=1.7;fontFamily=Arial;fontSize=16;fontColor=#17364D;fontStyle=1;" vertex="1" parent="stage_graph">
+          <mxGeometry x="36" y="164" width="40" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="method_landmark_2" value="L3" style="ellipse;html=1;fillColor=#FFF2DF;strokeColor=#C97924;strokeWidth=1.7;fontFamily=Arial;fontSize=16;fontColor=#C97924;fontStyle=1;" vertex="1" parent="stage_graph">
+          <mxGeometry x="176" y="164" width="40" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="bipartite_0_0" value="" style="edgeStyle=none;html=1;strokeColor=#C9D6DF;strokeWidth=1.2;endArrow=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="stage_graph" source="method_agent_0" target="method_landmark_0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="bipartite_0_1" value="" style="edgeStyle=none;html=1;strokeColor=#C9D6DF;strokeWidth=1.2;endArrow=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="stage_graph" source="method_agent_0" target="method_landmark_1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="bipartite_0_2" value="" style="edgeStyle=none;html=1;strokeColor=#C9D6DF;strokeWidth=1.2;endArrow=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="stage_graph" source="method_agent_0" target="method_landmark_2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="bipartite_1_0" value="" style="edgeStyle=none;html=1;strokeColor=#C9D6DF;strokeWidth=1.2;endArrow=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="stage_graph" source="method_agent_1" target="method_landmark_0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="bipartite_1_1" value="" style="edgeStyle=none;html=1;strokeColor=#C9D6DF;strokeWidth=1.2;endArrow=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="stage_graph" source="method_agent_1" target="method_landmark_1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="bipartite_1_2" value="" style="edgeStyle=none;html=1;strokeColor=#C9D6DF;strokeWidth=1.2;endArrow=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="stage_graph" source="method_agent_1" target="method_landmark_2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="bipartite_2_0" value="" style="edgeStyle=none;html=1;strokeColor=#C9D6DF;strokeWidth=1.2;endArrow=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="stage_graph" source="method_agent_2" target="method_landmark_0">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="bipartite_2_1" value="" style="edgeStyle=none;html=1;strokeColor=#C9D6DF;strokeWidth=1.2;endArrow=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="stage_graph" source="method_agent_2" target="method_landmark_1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="bipartite_2_2" value="" style="edgeStyle=none;html=1;strokeColor=#C9D6DF;strokeWidth=1.2;endArrow=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="stage_graph" source="method_agent_2" target="method_landmark_2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_mask" value="Bᵤᵥ = 1 for A–L edges; 0 otherwise" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=16;fontColor=#647989;fontStyle=0;align=left;verticalAlign=middle;" vertex="1" parent="stage_graph">
+          <mxGeometry x="245" y="57" width="235" height="37" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_distance" value="dᵤᵥ = ||Xᵢ[u] − Xᵢ[v]||₂" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontColor=#243746;fontStyle=0;align=left;verticalAlign=middle;" vertex="1" parent="stage_graph">
+          <mxGeometry x="245" y="104" width="235" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_weight" value="Wᵤᵥ = Bᵤᵥ exp(−dᵤᵥ² / 2σ²)" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontColor=#243746;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="stage_graph">
+          <mxGeometry x="245" y="150" width="235" height="46" as="geometry"/>
+        </mxCell>
+        <mxCell id="bandwidth" value="σ = 0.6" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=17;fontColor=#2877A8;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="stage_graph">
+          <mxGeometry x="245" y="201" width="235" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="degree_formula" value="Dᵤᵤ = ∑ᵥ Wᵤᵥ" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#C9D6DF;strokeWidth=1.3;fontFamily=Arial;fontSize=19;fontColor=#243746;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="stage_hks">
+          <mxGeometry x="22" y="60" width="210" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="lap_formula" value="L = I − D⁻¹ᐟ² W D⁻¹ᐟ²" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#C9D6DF;strokeWidth=1.3;fontFamily=Arial;fontSize=19;fontColor=#243746;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="stage_hks">
+          <mxGeometry x="252" y="60" width="226" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="heat_formula" value="hᵢ(τ) = [exp(−τL)]ᵢᵢ" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#E8F3F9;strokeColor=#2877A8;strokeWidth=1.3;fontFamily=Arial;fontSize=22;fontColor=#243746;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="stage_hks">
+          <mxGeometry x="50" y="133" width="400" height="57" as="geometry"/>
+        </mxCell>
+        <mxCell id="times" value="τ ∈ {0.5, 1, 2}   ·   three focal returns" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=18;fontColor=#243746;fontStyle=0;align=center;verticalAlign=middle;" vertex="1" parent="stage_hks">
+          <mxGeometry x="25" y="202" width="450" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="actor_concat" value="[oᵢ ; hᵢ] ∈ R²¹&lt;br&gt;18 raw + 3 HKS" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#E8F3F9;strokeColor=#2877A8;strokeWidth=1.3;fontFamily=Arial;fontSize=21;fontColor=#243746;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="stage_actor">
+          <mxGeometry x="40" y="55" width="420" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="actor_network" value="MADDPG actor πᵢ  ·  two 64-unit ReLU layers" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#C9D6DF;strokeWidth=1.3;fontFamily=Arial;fontSize=19;fontColor=#243746;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="stage_actor">
+          <mxGeometry x="40" y="133" width="420" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="actor_output" value="5 movement-action logits" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#17364D;strokeColor=#17364D;strokeWidth=1.3;fontFamily=Arial;fontSize=19;fontColor=#243746;fontStyle=1;align=center;verticalAlign=middle;fontColor=#FFFFFF;" vertex="1" parent="stage_actor">
+          <mxGeometry x="100" y="194" width="300" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="step_1_to_2" value="" style="edgeStyle=none;html=1;strokeColor=#2877A8;strokeWidth=2.2;endArrow=block;endSize=9;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="stage_obs" target="stage_graph">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="step_2_to_3" value="" style="edgeStyle=none;html=1;strokeColor=#2877A8;strokeWidth=2.2;endArrow=block;endSize=9;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="stage_graph" target="stage_hks">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="step_3_to_4" value="" style="edgeStyle=none;html=1;strokeColor=#2877A8;strokeWidth=2.2;endArrow=block;endSize=9;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="stage_hks" target="stage_actor">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="ctde_band" value="" style="rounded=1;arcSize=8;html=1;fillColor=#F4F7F9;strokeColor=#C9D6DF;strokeWidth=1.4;container=1;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="20" y="565" width="1060" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="ctde_label" value="CTDE INTERFACE" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=16;fontColor=#17364D;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="ctde_band">
+          <mxGeometry x="15" y="7" width="165" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ctde_replay" value="Replay: raw observations + actions" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=16;fontColor=#243746;fontStyle=0;align=center;verticalAlign=middle;" vertex="1" parent="ctde_band">
+          <mxGeometry x="180" y="7" width="280" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ctde_critic" value="Critic: raw joint input (69-D)" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=16;fontColor=#243746;fontStyle=0;align=center;verticalAlign=middle;" vertex="1" parent="ctde_band">
+          <mxGeometry x="475" y="7" width="290" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="ctde_target" value="Target actor: same HKS on next observations" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=16;fontColor=#243746;fontStyle=0;align=center;verticalAlign=middle;" vertex="1" parent="ctde_band">
+          <mxGeometry x="765" y="7" width="285" height="28" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

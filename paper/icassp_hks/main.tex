@@ -27,7 +27,13 @@ Graph diffusion provides such a summary through spectral functions of the graph 
 We construct a weighted agent--landmark graph from each actor's observation and append three focal HKS values to the original policy input. The resulting feature is a deterministic summary of current geometry within the existing decentralized observation and CTDE interfaces. We derive how weighted return paths encode relations through shared landmarks and characterize the descriptor's transformation properties. A five-seed comparison with raw-observation MADDPG then measures coverage, assignment distance, collisions, and return. HKS yields better mean coverage and assignment distance alongside more frequent collisions, with variability across seeds.
 
 \section{Problem Formulation}
-We consider the standard cooperative-navigation simple spread task~\cite{lowe} with $N=3$ movable agents and $M=3$ fixed landmarks in a two-dimensional workspace. Let $p_i^t,v_i^t\in\R^2$ denote the position and velocity of agent $i$ at step $t$, and let $\ell_m\in\R^2$ denote landmark $m$. Each episode lasts $T=25$ steps. An agent chooses one of five discrete movement actions (no-op and motion along the two coordinate axes). The task objective is to bring the team close to all landmarks while avoiding agent--agent collisions.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figure1_task.pdf}
+\caption{Three-agent cooperative-navigation task with three landmarks. Dashed arrows illustrate possible target assignments; the team seeks landmark coverage while avoiding agent--agent collisions.}
+\label{fig:task}
+\end{figure}
+As illustrated in Fig.~\ref{fig:task}, we consider the standard cooperative-navigation simple spread task~\cite{lowe} with $N=3$ movable agents and $M=3$ fixed landmarks in a two-dimensional workspace. Let $p_i^t,v_i^t\in\R^2$ denote the position and velocity of agent $i$ at step $t$, and let $\ell_m\in\R^2$ denote landmark $m$. Each episode lasts $T=25$ steps. An agent chooses one of five discrete movement actions (no-op and motion along the two coordinate axes). The task objective is to bring the team close to all landmarks while avoiding agent--agent collisions.
 
 The standard environment reward reflects these two requirements. The shared coverage term is determined by the distance from each landmark to its nearest agent,
 \begin{equation}
@@ -52,8 +58,8 @@ Given the decentralized observation $o_i^t$, we seek a compact representation $z
 \section{Proposed Method}
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.72\textwidth]{A1_actor_augmentation_overview.pdf}
-\caption{Actor-side structural augmentation. Each actor retains its 18-dimensional raw observation, constructs the observation-derived agent--landmark relation graph, computes three focal HKS values, and concatenates them with the raw actor input. The centralized critic continues to use raw joint observations and actions.}
+\includegraphics[width=\textwidth]{figure2_hks_actor.pdf}
+\caption{Actor-side HKS augmentation. The local observation defines a weighted agent--landmark bipartite graph with Gaussian bandwidth $\sigma=0.6$. The normalized-Laplacian heat kernel gives three focal values at diffusion times $\tau\in\{0.5,1,2\}$, which are appended to the 18-D actor input. Replay and the centralized critic use raw observations and actions.}
 \label{fig:method_overview}
 \end{figure*}
 \subsection{Observation-Derived Agent--Landmark Graph}
@@ -68,7 +74,7 @@ where $j,k\neq i$. Only fields already contained in the observation are used. Ag
 Thus the graph topology is fixed while the weights adapt deterministically to the current geometry.
 
 \subsection{Heat-Kernel Structural Descriptor}
-Let $D_i=\operatorname{diag}(W_i\mathbf{1})$ and
+Let $D_i$ be the weighted-degree matrix, with $(D_i)_{uu}=\sum_v W_{i,uv}$, and
 \begin{equation}
  L_i=I-D_i^{-1/2}W_iD_i^{-1/2}=U_i\Lambda_iU_i^\top.
 \end{equation}
@@ -104,14 +110,8 @@ with dimension $3\times18+3\times5=69$. Target actors compute the same descripto
 
 
 
+\clearpage
 \section{Experiments}
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{target_coverage_over_training.pdf}
-\caption{Target coverage during training. At each evaluation checkpoint, coverage is the fraction of landmarks covered at the episode endpoint, averaged across five training seeds; shaded bands show 95\% intervals across seeds.}
-\label{fig:coverage_training}
-\end{figure}
-
 \begin{table}[t]
 \centering
 \caption{Best-return checkpoint selected separately for each method and seed on a 100-episode bank, then evaluated on the common 500-episode bank. Mean $\pm$ sample standard deviation across five training seeds.}
@@ -130,9 +130,38 @@ Full coverage (\%) $\uparrow$ & $0.52 \pm 0.56$ & $2.04 \pm 3.36$ \\
 \end{tabular}
 \end{table}
 \subsection{Experimental Setup}
-Raw MADDPG and HKS-augmented MADDPG are trained with seeds 41--45 for $2\times10^6$ environment transitions per seed. Both use four rollout environments, replay capacity $10^6$, batch size 1024, discount 0.95, actor/critic learning rate 0.01, target-update coefficient 0.01, and two 64-unit ReLU hidden layers. For each training seed, checkpoints are evaluated every 20,000 steps on a common 100-episode selection bank; the checkpoint with the highest mean return is then evaluated without exploration on a disjoint 500-episode bank.
+Raw MADDPG and HKS-augmented MADDPG use the matched settings in Table~\ref{tab:setup}. For each training seed, checkpoints are evaluated every 20,000 steps on a common 100-episode selection bank; the checkpoint with the highest mean return is then evaluated without exploration on a disjoint 500-episode bank.
+
+\begin{table}[t]
+\centering
+\caption{Task and training settings shared by both methods.}
+\label{tab:setup}
+\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{tabular}{ll}
+\toprule
+Parameter & Setting \\
+\midrule
+Task & Simple spread; 3 agents, 3 landmarks \\
+Episode / actions & 25 steps / 5 discrete actions \\
+Training seeds & 41--45 \\
+Transitions per seed & $2\times10^6$ \\
+Rollout environments / replay & 4 / $10^6$ transitions \\
+Batch size / discount & 1024 / 0.95 \\
+Actor and critic networks & Two 64-unit ReLU hidden layers \\
+Actor / critic learning rate & 0.01 / 0.01 \\
+Target-update coefficient & 0.01 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 Return is retained as an overall reward measure, while task-level metrics directly measure navigation behavior. Assignment distance is the minimum endpoint average distance under a one-to-one agent--landmark matching. Target coverage rate is the fraction of landmarks covered at the episode endpoint using the environment's evaluation threshold. Figure~\ref{fig:coverage_training} tracks this quantity throughout training. We additionally report coverage-radius AUC, which averages coverage over radii from 0.05 to 0.30, and collision-step rate, the fraction of steps with at least one agent collision.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{target_coverage_over_training.pdf}
+\caption{Target coverage during training. At each evaluation checkpoint, coverage is the fraction of landmarks covered at the episode endpoint, averaged across five training seeds; shaded bands show 95\% intervals across seeds.}
+\label{fig:coverage_training}
+\end{figure}
 
 \subsection{Results and uncertainty}
 Figure~\ref{fig:coverage_training} tracks endpoint target coverage during training; HKS has higher mean coverage through much of the later stage. At the selected checkpoints, Table~\ref{tab:results} shows a decrease in mean one-to-one assignment distance from 0.292 to 0.235 (19.6\%) and an increase in coverage-radius AUC from 0.384 to 0.487 (26.9\%). Mean return changes from $-26.058$ to $-24.952$. HKS improves return, assignment distance, and coverage AUC in three of the five paired seeds, rather than uniformly.
