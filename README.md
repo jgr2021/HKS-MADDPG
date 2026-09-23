@@ -1,68 +1,39 @@
 # HKS-MADDPG
 
-**HKS** (Heat Kernel Signature) feature augmentation for Multi-Agent Reinforcement Learning, built on **MADDPG** ([Lowe et al., 2017](https://arxiv.org/abs/1706.02275)).
+Code and manuscript for **Heat-Kernel Structural Features for Cooperative Policy Learning**.
 
-This repository contains the official experiment code for the HKS paper. The focal method augments each agent's local observation with a **graph-signal-processing (GSP) descriptor** before feeding it to the policy network, improving cooperative behavior on the multi-agent particle environment (MPE) `simple_spread` task.
+## Paper
 
-## Method
+- [Read the five-page paper](paper/icassp_hks/main.pdf)
+- [LaTeX source](paper/icassp_hks/main.tex)
 
-Given the agents' and landmarks' positions, we construct a weighted geometric graph:
+The paper studies cooperative navigation in MPE `simple_spread` with three agents and three landmarks. Its experimental comparison is **MADDPG with raw observations vs. MADDPG with HKS features**, trained with seeds 41–45.
 
-- **Agent–agent** edges: Gaussian kernel with bandwidth `σ = 0.8`
-- **Agent–landmark** edges: Gaussian kernel with bandwidth `σ = 0.6`
+## Method in the paper
 
-The normalized graph Laplacian is then spectrally decomposed, and the **heat kernel signature** (HKS) is computed by applying the heat operator `exp(-t L)` to the graph signal across a set of diffusion times. The resulting per-node descriptor is concatenated to the raw 18-dim observation and fed into a standard MLP actor.
+Each actor reconstructs the agent and landmark positions from its own 18-dimensional observation. The six nodes form a complete agent–landmark bipartite graph. For an agent–landmark pair of nodes (u,v), the edge weight is
 
-Three observation descriptors are supported by the `LocalActor`:
+\[
+W_{uv}=\exp\!\left(-\frac{\|x_u-x_v\|_2^2}{2(0.6)^2}\right),
+\]
 
-| descriptor    | meaning                                              |
-|---------------|------------------------------------------------------|
-| `raw`         | unmodified 18-dim observation (baseline)             |
-| `fixed_hks`   | HKS with a fixed Gaussian bandwidth (the focal method)|
-| `adaptive_hks`| HKS with an adaptive, median-distance bandwidth       |
+and all other entries of (W) are zero. The normalized Laplacian (L=I-D^{-1/2}WD^{-1/2}) gives three focal heat-kernel values, ([e^{-\tau L}]_{ii}) at \(\tau\in\{0.5,1,2\}\). These values are appended to the raw observation, giving the actor a 21-dimensional input. The centralized critic continues to use raw joint observations and actions.
 
-## Environment
+## Evaluation reported in the paper
 
-The experiments run on **MPE `simple_spread`** with discrete actions. Three agents must cooperatively cover three landmarks without colliding.
+Each seed is trained for two million environment transitions. The checkpoint with the highest mean return on a common 100-episode selection bank is evaluated on a separate common 500-episode bank. The paper reports means and sample standard deviations over all five seeds, along with paired uncertainty. HKS has lower mean assignment distance and higher mean coverage-radius AUC, while collision-step frequency is higher. The paired return confidence interval includes zero.
+
+The repository also contains code for other experimental configurations. Their results are outside this paper's Raw-vs-HKS comparison.
 
 ## Repository layout
 
-```
-algorithms/       MADDPG and the MAPPO/HKS policy implementations
-experiments/      training, evaluation, and analysis scripts
-utils/            HKS feature builders, environment wrappers, networks
-multiagent/       the MPE multi-agent environment and scenarios
-tests/            unit tests for features and policies
-main.py           MADDPG training entry point
-```
+| Path | Contents |
+| --- | --- |
+| `paper/icassp_hks/` | Manuscript PDF, LaTeX source, bibliography, and included figures |
+| `algorithms/` | Multi-agent learning implementations |
+| `experiments/` | Training, evaluation, and analysis scripts |
+| `utils/` | Feature construction and policy modules |
+| `multiagent/` | Particle environment |
+| `tests/` | Code checks |
 
-## Installation
-
-```bash
-pip install -r requirements.txt
-```
-
-Requirements include PyTorch, NumPy, gym, and tensorboardX.
-
-## Usage
-
-Train MADDPG on `simple_spread`:
-
-```bash
-python main.py simple_spread maddpg_hks --discrete_action --seed 41 --n_episodes 25000
-```
-
-## Citation
-
-```bibtex
-@misc{hks-maddpg,
-  title        = {HKS: Heat-Kernel-Signature Feature Augmentation for Multi-Agent Reinforcement Learning},
-  author       = {Gurui Jin},
-  year         = {2026},
-  howpublished = {\url{https://github.com/jgr2021/hks-maddpg}},
-}
-```
-
-## License
-
-MIT
+To build the manuscript, run `latexmk -pdf main.tex` inside `paper/icassp_hks/`. The LaTeX style, bibliography style, and figure files are included in that directory.
