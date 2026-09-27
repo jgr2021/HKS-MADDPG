@@ -3,15 +3,14 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Training artifacts (checkpoints, logs, metrics)
+# Generated training artifacts
+/outputs/
+/models/
+events.out.tfevents.*
 *.pt
 *.pth
-*.npz
-*.npy
 *.ckpt
 *.log
-*.csv
-*.json
 
 # Environment / dependencies
 .venv/
@@ -24,3 +23,5 @@ env/
 Thumbs.db
 .idea/
 .vscode/
+.env
+.pytest_cache/
