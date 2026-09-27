@@ -100,12 +100,12 @@ trained checkpoints, and experiment result tables are not bundled.
 python -m unittest discover -s tests -v
 ```
 
-## Acknowledgements and references
+## References
 
-- MADDPG: Lowe et al., *Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments*, NeurIPS 2017. [Paper](https://arxiv.org/abs/1706.02275).
-- HKS: Sun, Ovsjanikov, and Guibas, *A Concise and Provably Informative Multi-Scale Signature Based on Heat Diffusion*, Computer Graphics Forum, 2009. [Paper](https://doi.org/10.1111/j.1467-8659.2009.01515.x).
-- The training implementation builds on [shariqiqbal2810/maddpg-pytorch](https://github.com/shariqiqbal2810/maddpg-pytorch), with the [Multi-Agent Particle Environment](https://github.com/openai/multiagent-particle-envs).
+[1] R. Lowe et al., “Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments,” in *Advances in Neural Information Processing Systems*, 2017. [Online](https://arxiv.org/abs/1706.02275).
 
-Historical exploratory scripts are retained in the
-[`archive/research-20260927`](https://github.com/jgr2021/HKS-MADDPG/tree/archive/research-20260927)
-branch. See [archive details](docs/ARCHIVE.md) for the previous layout.
+[2] J. Sun, M. Ovsjanikov, and L. Guibas, “A Concise and Provably Informative Multi-Scale Signature Based on Heat Diffusion,” *Computer Graphics Forum*, 2009. [Online](https://doi.org/10.1111/j.1467-8659.2009.01515.x).
+
+[3] shariqiqbal2810, “MADDPG-PyTorch,” GitHub repository. [Online](https://github.com/shariqiqbal2810/maddpg-pytorch).
+
+[4] OpenAI, “Multi-Agent Particle Environment,” GitHub repository. [Online](https://github.com/openai/multiagent-particle-envs).
