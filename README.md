@@ -23,7 +23,8 @@ Local observation (18D)
 ```
 
 The centralized critic and replay buffer use raw observations. The released
-comparison is **Raw MADDPG versus HKS-augmented MADDPG**.
+comparison supports **Raw MADDPG, Adjacency Statistics, and HKS-augmented MADDPG**.
+See [the controlled comparison](docs/THREE_WAY_CONTROL.md) for commands and inference limits.
 See [method and equations](docs/METHOD.md) for the graph, descriptor, and observation layout.
 
 ## Start here
@@ -31,7 +32,7 @@ See [method and equations](docs/METHOD.md) for the graph, descriptor, and observ
 | What you want to do | Entry point |
 | --- | --- |
 | Understand the method | [Method](docs/METHOD.md) |
-| Train Raw or HKS | [`scripts/train.py`](scripts/train.py) |
+| Train Raw, Adjacency, or HKS | [`scripts/train.py`](scripts/train.py) |
 | Evaluate a checkpoint or select the best checkpoint of a run | [`scripts/evaluate.py`](scripts/evaluate.py) |
 | Summarize all five training seeds | [`scripts/summarize.py`](scripts/summarize.py) |
 | Check settings, metrics, and output files | [Reproducibility](docs/REPRODUCIBILITY.md) |
@@ -57,12 +58,13 @@ Run commands from the repository root:
 
 ```bash
 python scripts/train.py --method raw --seed 41 --output outputs
+python scripts/train.py --method fixed_adjacency --seed 41 --output outputs
 python scripts/train.py --method hks --seed 41 --output outputs
 ```
 
 Each command trains one seed for **2,000,000 environment transitions**, using
 **four rollout environments** and CUDA optimization. For the five-seed comparison,
-complete Raw seeds **41–45**, then HKS seeds **41–45**. Existing run directories
+complete seeds **41–45** for each of the three methods. Existing run directories
 are never overwritten.
 
 ## Evaluation

@@ -45,7 +45,7 @@ the rollout count for its update rounds; changing it is therefore a training
 protocol change even when the transition budget is held fixed.
 
 The public entry point calls the existing experiment trainer, registers the
-original Raw/HKS actors, and preserves their parameter names. Environment
+original Raw/Adjacency/HKS actors, and preserves their parameter names. Environment
 simulation and training action collection use CPU; optimization uses CUDA.
 
 ## Output files
@@ -99,7 +99,7 @@ For an explicit checkpoint:
 python scripts/evaluate.py --checkpoint outputs/hks/seed_41/checkpoints/model_final_2000000.pt --output outputs/evaluation/hks_41_final
 ```
 
-The public tools load Raw/HKS checkpoints. Other historical actor types may
+The public tools load Raw/Adjacency/HKS checkpoints. Other historical actor types may
 require the additional registrations in the archived experiment scripts.
 
 ## Five-seed summary
@@ -108,7 +108,7 @@ require the additional registrations in the archived experiment scripts.
 python scripts/summarize.py outputs/evaluation/hks_41/summary.json outputs/evaluation/hks_42/summary.json outputs/evaluation/hks_43/summary.json outputs/evaluation/hks_44/summary.json outputs/evaluation/hks_45/summary.json --output outputs/evaluation/hks_summary.csv
 ```
 
-Repeat for Raw, or supply both methods' ten summary files in one command. The
+Repeat for Raw and Adjacency, or supply all three methods' fifteen summary files in one command. The
 script requires all five seeds and matching 100/500-episode banks and devices.
 The reported standard deviation uses `ddof=1` across the five seed means.
 
@@ -132,3 +132,8 @@ The public tests check the HKS formula against a matrix exponential, descriptor
 permutation behavior, actor/critic dimensions, checkpoint round trips,
 deterministic environment evaluation, and five-seed aggregation. They do not
 retrain the published experiment or claim to reproduce its numerical results.
+
+## Three-way control
+
+See [THREE_WAY_CONTROL.md](THREE_WAY_CONTROL.md) for `fixed_adjacency`, full commands,
+capacity accounting, result recording, and limits on spectral attribution.

@@ -8,7 +8,7 @@ import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from _common import load_runtime, summarize
+from _common import METHODS, load_runtime, summarize
 from evaluate import select_checkpoint
 from summarize import aggregate
 import train
@@ -45,7 +45,7 @@ class PublicWorkflowTests(unittest.TestCase):
         torch.testing.assert_close(features(raw, {}), features(permuted, {}), atol=2e-6, rtol=2e-5)
 
     def test_raw_and_hks_checkpoint_roundtrip_and_dimensions(self):
-        for actor, width in (("mlp", 18), ("confirm_fixed_hks", 21)):
+        for actor, width in METHODS.values():
             with self.subTest(actor=actor), tempfile.TemporaryDirectory() as tmp:
                 env = make_parallel_env("simple_spread", 1, 41, True)
                 try:
@@ -70,7 +70,7 @@ class PublicWorkflowTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             env = make_parallel_env("simple_spread", 1, 41, True)
             try:
-                model = MADDPG.init_from_env(env, actor_model="confirm_fixed_hks")
+                model = MADDPG.init_from_env(env, actor_model="confirm_fixed_adjacency")
                 checkpoint = Path(tmp) / "model.pt"
                 model.save(checkpoint)
             finally:
@@ -90,7 +90,7 @@ class PublicWorkflowTests(unittest.TestCase):
                 curve_eval_seed_base=91000000-410000, curve_eval_episodes=100)))
             rows = [dict(checkpoint="model_step20000", seed=41, method="hks", **{"return": -30}),
                     dict(checkpoint="model_step40000", seed=41, method="hks", **{"return": -20}),
-                    dict(checkpoint="model_step60000", seed=41, method="hks", **{"return": -40})]
+                    dict(checkpoint="model_step60000", seed=41, method="hks", **{"return": -20})]
             with (root / "learning_curve_eval.csv").open("w", newline="") as handle:
                 writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
                 writer.writeheader(); writer.writerows(rows)
