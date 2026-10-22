@@ -5,7 +5,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "code"))
 
-METHODS = {"raw": ("mlp", 18), "hks": ("confirm_fixed_hks", 21)}
+METHODS = {"raw": ("mlp", 18), "fixed_adjacency": ("confirm_fixed_adjacency", 21),
+           "hks": ("confirm_fixed_hks", 21)}
 CURVE_SEED = 91000000
 FINAL_SEED = 92000000
 

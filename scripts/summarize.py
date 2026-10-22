@@ -2,6 +2,7 @@
 import argparse
 import csv
 import json
+import math
 from pathlib import Path
 import statistics
 
@@ -27,6 +28,8 @@ def aggregate(records):
             raise ValueError("use selected-checkpoint evaluations, not final-step evaluations")
         for metric in ("return", "coverage_fraction", "full_coverage_rate", "collision_step_rate"):
             values = [r[metric] for r in rows]
+            if not all(math.isfinite(value) for value in values):
+                raise ValueError(f"{method}: non-finite {metric}")
             result.append(dict(method=method, metric=metric, n_seeds=5,
                                mean=statistics.mean(values), sample_std=statistics.stdev(values)))
     return result

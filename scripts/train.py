@@ -1,4 +1,4 @@
-"""Train Raw or HKS MADDPG using the existing audited experiment loop."""
+"""Train Raw, Adjacency Statistics, or HKS MADDPG using the existing audited experiment loop."""
 import argparse
 import json
 import os
